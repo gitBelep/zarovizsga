@@ -1,4 +1,4 @@
-package hu.nive.ujratervezes.zarovizsga;
+package hu.nive.ujratervezes.zarovizsga.kennel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,4 +43,7 @@ public class Kennel {
         return namesOfHappyDogs;
     }
 
+    public List<Dog> getDogs() {
+        return dogs;
+    }
 }
