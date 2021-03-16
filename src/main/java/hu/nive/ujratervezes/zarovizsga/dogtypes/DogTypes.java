@@ -22,7 +22,7 @@ public class DogTypes {
             PreparedStatement ps = conn.prepareStatement(
                     "SELECT `name` FROM `dog_types` WHERE `country` = ?;")
         ) {
-            ps.setString(1, orszag);
+            ps.setString(1, orszag.toUpperCase());
             return new ArrayList<>(getNamesByPreparedStatement(ps));
         } catch (SQLException se) {
             throw new IllegalArgumentException("Cannot connect", se);

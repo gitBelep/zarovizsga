@@ -1,17 +1,19 @@
 package hu.nive.ujratervezes.zarovizsga.workhours;
 
+import java.time.LocalDate;
+
 public class Hour {
     private String name;
     private int hours;
-    private String date;
+    private LocalDate day;
 
     public Hour() {
     }
 
-    public Hour(String name, int hours, String date) {
+    public Hour(String name, int hours, LocalDate day) {
         this.name = name;
         this.hours = hours;
-        this.date = date;
+        this.day = day;
     }
 
     public String getName() {
@@ -22,7 +24,8 @@ public class Hour {
         return hours;
     }
 
-    public String getDate() {
-        return date;
+    public LocalDate getDay() {
+        return day;
     }
+
 }

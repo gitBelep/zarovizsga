@@ -3,6 +3,7 @@ package hu.nive.ujratervezes.zarovizsga.workhours;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +26,9 @@ public class WorkHours {
         String[] data = line.split(",");
         String name = data[0];
         int worked = Integer.parseInt(data[1]);
-        String date = data[2];
-        workedHours.add( new Hour(name, worked, date) );
+        String[] date = data[2].split("-");
+        LocalDate day = LocalDate.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]));
+        workedHours.add( new Hour(name, worked, day) );
     }
 
     private String chooseMin(){
@@ -38,6 +40,7 @@ public class WorkHours {
                 lazyestWorker = h;
             }
         }
-        return lazyestWorker.getName() +": "+lazyestWorker.getDate();
+        return String.format("%s: %s", lazyestWorker.getName(), lazyestWorker.getDay().toString());
     }
+
 }
