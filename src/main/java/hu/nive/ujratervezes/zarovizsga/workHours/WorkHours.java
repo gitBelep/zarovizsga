@@ -3,6 +3,8 @@ package hu.nive.ujratervezes.zarovizsga.workhours;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,8 @@ public class WorkHours {
 
     public String minWork(String file){
         try (BufferedReader br = new BufferedReader(new InputStreamReader(WorkHours.class.getResourceAsStream(file)))) {
+//Nem jövök rá, hogyan tudok a test/resources-ből olvasni. Így működik, ám ez meg nem fog szerintem működni kész alkalmazásban:
+//        try (BufferedReader br = Files.newBufferedReader(Path.of(file))) {
             String line;
             while((line = br.readLine()) != null) {
                 createHour(line);
