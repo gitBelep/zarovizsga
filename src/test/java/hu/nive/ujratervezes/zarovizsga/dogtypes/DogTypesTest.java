@@ -21,7 +21,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
             dataSource.setUser("employees");
             dataSource.setPassword("employees");
 
-            Flyway flyway = Flyway.configure().dataSource(dataSource).load();
+            Flyway flyway = Flyway.configure()
+                    .locations("/db/migration/dogs")
+                    .dataSource(dataSource).load();
 
             flyway.clean();
             flyway.migrate();
@@ -40,5 +42,3 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
         }
 
     }
-//INSERT INTO `dog_types` (`id`, `name`, `section`, `provisional`, `country`, `url`, `image`, `pdf`) VALUES
-//	(1, 'ENGLISH POINTER', 'British and Irish Pointers and Setters', '', 'GREAT BRITAIN',

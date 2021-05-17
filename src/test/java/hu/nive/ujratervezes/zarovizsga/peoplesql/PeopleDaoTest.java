@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class PeopleDaoTest {
 
     private PeopleDao peopleDao;
-    private PeopleDaoJdbc peopleDaoJDBC;
 
     @BeforeEach
     void init() throws SQLException {
@@ -20,13 +19,13 @@ class PeopleDaoTest {
         dataSource.setUser("employees");
         dataSource.setPassword("employees");
 
-        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
-
+        Flyway flyway = Flyway.configure()
+                .locations("/db/migration/people")
+                .dataSource(dataSource).load();
         flyway.clean();
         flyway.migrate();
 
         peopleDao = new PeopleDao(dataSource);
-        peopleDaoJDBC = new PeopleDaoJdbc(dataSource);
     }
 
 
@@ -34,19 +33,6 @@ class PeopleDaoTest {
     void findIpByName() {
         assertEquals("134.135.61.66", peopleDao.findIpByName("Brina", "Snibson"));
         assertEquals("97.203.249.128", peopleDao.findIpByName("Torrence", "Porteous"));
-    }
-
-    @Test
-    void findIpByName_Jdbc() {
-        assertEquals("134.135.61.66", peopleDaoJDBC.findIpByName("Brina", "Snibson"));
-        assertEquals("97.203.249.128", peopleDaoJDBC.findIpByName("Torrence", "Porteous"));
-    }
-
-    @Test
-    void testInsertPeople(){
-        peopleDaoJDBC.insertPeople(1001L,"Sámuel", "Aba","as@gmail.com","eldönti","222.22.22.222");
-
-        assertEquals("222.22.22.222", peopleDaoJDBC.findIpByName("Sámuel", "Aba"));
     }
 
 }
